@@ -7,7 +7,6 @@ int main(void) {
 
 	//주솟값 4바이트 만큼의 차이
 	printf("%d %d", &arr[0], &arr[1]);
-	//주솟값 1바이트 만큼의 차이
-	printf("%d %d", &str[0], &str[1]);
+	printf("%d %d", arr+0, arr+1);
 	return 0;
 }
