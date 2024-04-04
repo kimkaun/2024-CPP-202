@@ -1,10 +1,13 @@
-#include <stdio.h>
-#include <string.h>
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 int main(void) {
-	char str[30] = "c";
+	string str = "c++";
 	// 기존 문자열에다가 추가
-	strcat(str, "addition");
+	str += "addition";
 
-	printf("%s", str);
+	cout << str;
+
 }
