@@ -1,9 +1,11 @@
-#include <stdio.h>
-#include <String.h>
+#include <iostream>
+#include <String>
 int main(void) {
+	std :: string str = "develop hungry";
+	std :: string str2;
 
-	char str[30] = "develop hungry";
-	char str2[30];
 	// str에 있는 내용을 str2에 복사
-	strcpy(str2, str);
+	str2 = str;
+
+	std::cout << str2;
 }
