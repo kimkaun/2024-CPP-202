@@ -8,6 +8,12 @@ public:
 	//  생성자 : 객체가 생성될 때 호출되는 함수
 	// 생성자는 반환형(return type)이 없다.
 	Student() {
+		// this : 자기자신을 가리키는 포인터
+		// 멤버를 명확하게 가리킬 수 있다.
+		this->hakbun_ = 2222;
+		name_ = "swag";
+	}
+	Student() {
 		hakbun_ = 2222;
 		name_ = "swag";
 	}
