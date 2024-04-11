@@ -34,7 +34,7 @@ int main(void) {
 	Student swag = Student();
 
 	
-	(*jisu).show();
+	jisu->show();
 	swag.show();
 
 	// 동적할당 해제
