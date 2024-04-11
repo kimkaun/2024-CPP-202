@@ -17,9 +17,9 @@ public:
 		hakbun_ = 2222;
 		name_ = "swag";
 	}
-	Student(int hakbun, string name) {
-		hakbun_ = hakbun;
-		name_ = name;
+	// 멤버변수 초기화 : 객체생성과 동시에 const 참조 멤버변수를 초기화 할수있다.
+	Student(int hakbun, string name) : hakbun_(hakbun), name_(name) {
+		
 	}
 	// 클래스의 멤버를 출력
 	void show(void) {
@@ -34,12 +34,12 @@ private:
 int main(void) {
 
 	// 동적할당 : 메모리는 heap에서 할당, 실행(런타임)시 메모리 크기가 정해짐
-    Student* jisu = new Student(2202, "나지수");
+	Student* jisu = new Student(2202, "나지수");
 
 	// 정적할당 : 메모리는 stack에서 할당, 컴파일 시 메모리 크기가 정해짐
 	Student swag = Student();
 
-	
+
 	jisu->show();
 	swag.show();
 
