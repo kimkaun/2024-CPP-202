@@ -34,17 +34,21 @@ private:
 int main(void) {
 
 	// 동적할당 : 메모리는 heap에서 할당, 실행(런타임)시 메모리 크기가 정해짐
-	Student* jisu = new Student(2202, "나지수");
+	Student* stu = new Student[3]{
+		{2202, "나지수"},
+		{2203, "박"},
+		{2215, "추"}
+	};
+	for (int i = 0; i < 3; i++) {
+		stu[1].show();
+	}
+	/*jisu[0].show();
+	jisu[1].show();
+	jisu[2].show();*/
 
-	// 정적할당 : 메모리는 stack에서 할당, 컴파일 시 메모리 크기가 정해짐
-	Student swag = Student();
 
-
-	jisu->show();
-	swag.show();
-
-	// 동적할당 해제
-	delete jisu;
+	// 배열의 동적할당 해제
+	delete []stu;
 
 	return 0;
 
