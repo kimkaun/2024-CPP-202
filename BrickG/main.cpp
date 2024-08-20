@@ -30,6 +30,20 @@ public:
     float bottom() { return shape.getPosition().y + shape.getRadius(); }
 };
 
+// Brick 클래스 정의
+class Brick {
+public:
+    sf::RectangleShape shape;
+    bool destroyed = false;
+
+    Brick(float mX, float mY) {
+        shape.setPosition(mX, mY);
+        shape.setSize({ 60.f, 20.f });
+        shape.setFillColor(sf::Color::Yellow);
+        shape.setOrigin(30.f, 10.f);
+    }
+};
+
 // Paddle 클래스 정의
 class Paddle {
 public:
@@ -46,7 +60,6 @@ public:
     }
 
     void update() {
-        // 왼쪽 화살키를 누르고 && 왼쪽 끝에 도달하지 않은 경우
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && left() > 0) {
             shape.move(-paddleVelocity, 0.f);
         }
@@ -57,31 +70,29 @@ public:
 
     float left() { return shape.getPosition().x - shape.getSize().x / 2.f; }
     float right() { return shape.getPosition().x + shape.getSize().x / 2.f; }
-    // 지금 당장을 쓸모가 없지만, 확장을 고려해서 일단 놔두겠다.
+    // 지금 당장은 쓸모가 없지만, 확장을 고려해서 일단 놔두겠다.
     float top() { return shape.getPosition().y - shape.getSize().y / 2.f; }
     float bottom() { return shape.getPosition().y + shape.getSize().y / 2.f; }
 };
 
+const int brick_row = 4;
+const int brick_column = 7;
+
 int main()
 {
     // 창 생성
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Shapes");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "bricks");
     window.setFramerateLimit(60);       // 초당 프레임을 60으로
 
-        Ball ball(800 / 2.f, 300.f);
-        Paddle paddle(600.f, 550.f);
+    Ball ball(800 / 2.f, 300.f);
+    Paddle paddle(400.f, 550.f);  //paddle의 위치
+    Brick bricks[brick_row][brick_column];
 
- /*
-    // 원 객체 생성
-    sf::CircleShape circle(100.f);
-    circle.setFillColor(sf::Color::Red);
-    circle.setPosition(100.f, 100.f);
-
-    // 사각형 객체 생성
-    sf::RectangleShape rectangle(sf::Vector2f(200.f, 100.f));
-    rectangle.setFillColor(sf::Color::Blue);
-    rectangle.setPosition(400.f, 300.f);
-    */   
+    for (int i = 0; i < brick_row; ++i) {
+        for (int j = 0; j < brick_column; ++j) {
+            bricks[i][j].setPosition(200 + (60 + 10) * j, 200 + (20 + 10) * i);
+        }
+    }
 
     // 이벤트 루프 시작
     while (window.isOpen())
@@ -93,27 +104,41 @@ int main()
                 window.close();
         }
 
-        // update
         paddle.update();
         ball.update();
 
+        // Paddle과 Ball의 충돌 처리
         if (ball.shape.getGlobalBounds().intersects(paddle.shape.getGlobalBounds())) {
             ball.velocity.y = -ball.velocity.y;
         }
 
-        // draw
+        // Brick과 Ball의 충돌 처리
+        for (int i = 0; i < brick_row; ++i) {
+            for (int j = 0; j < brick_column; ++j) {
+                if (!bricks[i][j].destroyed && ball.shape.getGlobalBounds().intersects(bricks[i][j].shape.getGlobalBounds())) {
+                    bricks[i][j].destroyed = false;
+                    bricks[i][j].destroyed = true;
+                    ball.velocity.y = -ball.velocity.y;
+                 //    ball.velocity.x = -ball.velocity.x;
+                }
+            }
+        }
 
         // 화면 지우기
-        window.clear();
+        window.clear(sf::Color::White);
 
-        // 그리기
+        // Paddle, Ball, Brick 그리기
         window.draw(paddle.shape);
         window.draw(ball.shape);
+        for (int i = 0; i < brick_row; ++i) {
+            for (int j = 0; j < brick_column; ++j) {
+                
+            }
+        }
 
         // 화면 업데이트
         window.display();
     }
-
 
     return 0;
 }
