@@ -10,7 +10,10 @@ public:
 			cout << "이름 : " << name_<< endl;
 			cout << "나이 : " << age_ << endl;
 			cout << "다리 : " << leg_num_ << endl;
-		}	
+		}
+	~Animal() {
+		cout << "Animal 소멸자" << endl;
+	}
 	// 동물이 하는 행동들
 	virtual void walk(void) {
 		cout << "걷다" << endl;
@@ -34,7 +37,9 @@ public:
 		: Animal(name, age, leg_num), loyalty_(loyalty) {	// name_(name) --> 에러, dog는 animal에 멤버접근을 못함
 			cout << "충성도" << endl;
 		}
-
+	~Dog() {
+		cout << "Dog 소멸자" << endl;
+	}
 	void bark() override {
 		cout << "울프울프" << endl;
 	}
@@ -49,16 +54,8 @@ private:
 };
 
 void main(void) {
-	Animal* animal = new Animal("요아조비", 8, 2);	// 동적할당
-	animal->walk();	
-	animal->bark();
-	animal->eat();
-	delete animal;	// 동적할당 해제
-
-	animal = new Dog("마루", 5, 2, 100);	// 동적할당
-	animal->walk();
-	animal->bark();
-	animal->eat();
+	Animal* animal = new Dog("마루", 5, 2, 100);	// 동적할당
+	
 	delete animal;
 
 	
