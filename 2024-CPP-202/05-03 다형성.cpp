@@ -12,13 +12,13 @@ public:
 			cout << "´Ù¸® : " << leg_num_ << endl;
 		}	
 	// µ¿¹°ÀÌ ÇÏ´Â Çàµ¿µé
-	void walk(void) {
+	virtual void walk(void) {
 		cout << "°È´Ù" << endl;
 	}
-	void bark(void) {
+	virtual void bark(void) {
 		cout << "Â¢´Ù" << endl;
 	}
-	void eat(void) {
+	virtual void eat(void) {
 		cout << "¸Ô´Ù" << endl;
 	}
 private:
@@ -34,14 +34,14 @@ public:
 		: Animal(name, age, leg_num), loyalty_(loyalty) {	// name_(name) --> ¿¡·¯, dog´Â animal¿¡ ¸â¹öÁ¢±ÙÀ» ¸øÇÔ
 			cout << "Ãæ¼ºµµ" << endl;
 		}
-	// C++Àº µğÆúÅ©°¡ Á¤Àû¹ÙÀÎµùÀÌ±â ¶§¹®¿¡ °¡»óÇÔ¼ö·Î ¿À¹ö¶óÀÌµù ÇØ¾ß ÇÑ´Ù.
-	void bark() {
+
+	void bark() override {
 		cout << "¿ïÇÁ¿ïÇÁ" << endl;
 	}
-	void eat() {
+	void eat() override {
 		cout << "¿Õ¿Õ" << endl;
 	}
-	void walk() {
+	void walk() override {
 		cout << "­h­h­h­h" << endl;
 	}
 private:
