@@ -11,7 +11,7 @@ public:
 			cout << "나이 : " << age_ << endl;
 			cout << "다리 : " << leg_num_ << endl;
 		}
-	~Animal() {
+	virtual ~Animal() {
 		cout << "Animal 소멸자" << endl;
 	}
 	// 동물이 하는 행동들
@@ -37,7 +37,7 @@ public:
 		: Animal(name, age, leg_num), loyalty_(loyalty) {	// name_(name) --> 에러, dog는 animal에 멤버접근을 못함
 			cout << "충성도" << endl;
 		}
-	~Dog() {
+	virtual ~Dog() {
 		cout << "Dog 소멸자" << endl;
 	}
 	void bark() override {
@@ -55,7 +55,7 @@ private:
 
 void main(void) {
 	Animal* animal = new Dog("마루", 5, 2, 100);	// 동적할당
-	
+	// 정적바인딩으로 인해 Dog소멸자는 호출되지 않는다.
 	delete animal;
 
 	
