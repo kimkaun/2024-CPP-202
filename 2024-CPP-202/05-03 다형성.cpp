@@ -14,16 +14,10 @@ public:
 	virtual ~Animal() {
 		cout << "Animal 소멸자" << endl;
 	}
-	// 동물이 하는 행동들
-	virtual void walk(void) {
-		cout << "걷다" << endl;
-	}
-	virtual void bark(void) {
-		cout << "짖다" << endl;
-	}
-	virtual void eat(void) {
-		cout << "먹다" << endl;
-	}
+	// 순수 가상함수(추상메서드)
+	virtual void walk(void) = 0;
+	virtual void bark(void) = 0;
+	virtual void eat(void) = 0;
 private:
 	// 동물 속성들
 	string name_;
@@ -54,8 +48,9 @@ private:
 };
 
 void main(void) {
+	// 추상클래스는 객체를 생성할 수 없다(new Animal() 불가)
 	Animal* animal = new Dog("마루", 5, 2, 100);	// 동적할당
-	// 정적바인딩으로 인해 Dog소멸자는 호출되지 않는다.
+	animal->bark();
 	delete animal;
 
 	
