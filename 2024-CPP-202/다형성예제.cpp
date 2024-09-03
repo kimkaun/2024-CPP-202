@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -10,16 +11,22 @@ public:
 		: civil_(civil), force_(force), name_(name), territory_(territory) {
 		
 	}
-	void show() {
+	virtual void show() {
 		cout << "국민 수 : " << civil_ << endl;
 		cout << "군사력 : " << force_ << endl;
 		cout << "이름 : " << name_ << endl;
 		cout << "땅 : " << territory_ << endl;
 	}
-// Food 속성인데 이상함 뭔가 Food kingdom 같은...?
-private:
+	void attack(Food* target) {
+		target->force_ -= force_;
+		if (target->force_ <= 0)
+			delete target;
+	}
+	virtual void attack(Food* target) = 0;
+// Food 속성
+public:
 	int civil_;			// 국민 수
-	int force_;			// 군사력
+	int force_;			// 군사력 : 0이 되면 멸망
 	string name_;		// 이름
 	int territory_;		// 땅(면적)
 };
@@ -35,7 +42,10 @@ public:
 		cout << "마늘 : " << garlic_ << endl;
 		cout << "고추 : " << pepper_ << endl;
 	}
-private:
+	void attack(Food* target) override {
+		target->force_ -= this->force_ * 2;
+	}
+public:
 	int garlic_;	
 	int pepper_;
 };
@@ -50,14 +60,17 @@ public:
 		cout << "젤라틴 : " << gelatin_ << endl;
 		cout << "설탕 : " << sugar_ << endl;
 	}
-private:
+	void attack(Food* target) override {
+		target->force_ += this->force_ / 2;
+	}
+public:
 	int gelatin_;		// 젤라틴
 	int sugar_;			// 설탕의 힘
 };
 
 class Cheese : public Food {
 public:
-	Cheese(int civil, int force, string name, int territory, int milk, int Rennet)
+	Cheese(int civil, int force, string name, int territory, int milk, int rennet)
 		: Food(civil, force, name, territory), milk_(milk), rennet_(rennet) {
 
 	}
@@ -66,7 +79,10 @@ public:
 		cout << "우유 : " << milk_ << endl;
 		cout << "응고제 : " << rennet_ << endl;
  	}
-private:
+	void attack(Food* target) override {
+		target->force_ += this->force_ / 3;
+	}
+public:
 	int milk_;
 	int rennet_;		// 응고제
 };
@@ -75,9 +91,48 @@ void main(void) {
 	Food* player = new Kimchi(15, 95, "갓김치", 86, 100, 100);
 	Food* friends = new Cheese(100, 20, "짜계치", 100, 20, 100);
 	
-	player->show();
-	friends->show();
+	while (true) {
+		system("cls");
+		cout << "★ 나 ★" << endl;
+		player->show();
 
+		cout << endl << endl;
+		cout << "★ 상대방 ★" << endl;
+		friends->show();
+
+		cout << "------------------------------" << endl;
+
+		int select;
+		cout << "1. 공격" << endl;
+		cout << "2. 특수1" << endl;
+		cout << "3. 특수2" << endl;
+		cout << "4. 방어" << endl;
+
+		cout << "------------------------------" << endl;
+
+		cin >> select;
+		switch (select) {
+		case 1:
+			// TODO : 공격
+			cout << "공격" << endl;
+			break;
+		case 2:
+			// TODO : 특수1
+			cout << "특수1" << endl;
+			break;
+		case 3:
+			// TODO : 특수2
+			cout << "특수2" << endl;
+			break;
+		case 4:
+			// TODO : 방어
+			cout << "방어" << endl;
+			break;
+		default:
+			cout << "디폴트" << endl;
+		}
+		system("pause");
+	}
 	delete player;
 	delete friends;
 }
