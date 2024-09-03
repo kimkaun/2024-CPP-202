@@ -62,6 +62,7 @@ public:
 
 	}
 	void show() {
+		Food::show();
 		cout << "우유 : " << milk_ << endl;
 		cout << "응고제 : " << rennet_ << endl;
  	}
