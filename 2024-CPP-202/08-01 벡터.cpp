@@ -7,7 +7,7 @@ void main(void) {
 	vector<long long> v;
 
 	// 미리 공간을 많이 확보하자. 성능을 위해
-	v.reserve(100)
+	v.reserve(100);
 
 	// 벡터 추가
 	v.push_back(4);
@@ -35,8 +35,10 @@ void main(void) {
 	v.pop_back();
 	v.pop_back();
 
-	for (int i = 0; i < v.size(); i++) {
-		cout << v[i] << endl;
+	// 반복자(iterator)
+	vector<long long>::iterator iter;
+	for (iter = v.begin(); iter != v.end(); iter++) {
+		cout << *iter << endl;
 	}
 
 }
