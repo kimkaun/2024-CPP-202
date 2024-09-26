@@ -13,16 +13,16 @@ enum FoodStyle {
 int main(void) {
     // 0 : 한식, 1 : 일식, 2 : 중식
     // 열겨형을 사용하면 가독성도 좋아지고, 중간에 값을 유연하게 추가할 수 있다. 
-    int style = KOREAN; // enum 값으로 초기화
+    int style = FoodStyle::KOREAN; // enum 값으로 초기화
 
     switch (style) {
-    case KOREAN:
+    case FoodStyle::KOREAN:
         cout << "김치, 쌈, 비빔밥" << endl;
         break;
-    case JAPANESE:
+    case FoodStyle:::
         cout << "초밥, 우동, 타코야끼" << endl;
         break;
-    case CHINESE:
+    case FoodStyle::CHINESE:
         cout << "동파육, 마라탕후루" << endl;
         break;
     }
