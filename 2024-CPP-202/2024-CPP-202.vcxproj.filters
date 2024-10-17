@@ -18,7 +18,7 @@
     <ClCompile Include="kittyCat.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="08-02 맵.cpp">
+    <ClCompile Include="09-04 static.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
